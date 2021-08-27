@@ -1,0 +1,66 @@
+<header class="event-header">
+	<div class="row align-center">
+		<div class="small-12 large-10 columns">
+			<div class="event-header__title">
+				<h1>{{ post.title }}</h1>
+				{% if post.composer %}
+					<h4>{{ post.composer }}</h4>
+				{% endif %}
+			</div>
+			<div class="event-header__details background--yellow">
+				{% if post.dates %}<span class="event-header__date"><i class="event-header__details__icon far fa-calendar-alt"></i>{{ post.dates }}</span>{% endif %}
+				{% if post.location %}<span class="event-header__location"><i class="event-header__details__icon fas fa-map-marked-alt"></i>{{ post.location }}</span>{% endif %}
+				{% if post.ticket_link %}<a class="button hollow" target="_blank" href="{{ post.ticket_link }}" class="event-header__tickets"><i class="fas fa-ticket-alt"></i>Tickets</a>{% endif %}
+			</div>			
+		</div>
+		
+		{% if post.thumbnail %}
+			<div class="small-12 large-10 columns">
+				<img class="event-header__image" src="{{ TimberImage(post.thumbnail)|resize(900) }}" alt="Photo for {{ post.title }}">
+			</div>
+		{% endif %}
+	</div>
+</header>
+
+<main class="event-description vertical-padding">
+	<div class="row align-center">
+	<div class="small-12 medium-10 columns">
+		{% if post.content %}{{ post.content }}{% endif %}
+		<a class="back-link" href="{{ site.link }}/events">Back to events</a>
+	</div>
+	</div>
+</main>
+
+{% if post.get_field('sub_events') %}
+	<div class="vertical-padding row columns align-center">
+		{% if post.get_field('sub-event_heading') %}<h5 class="text-center">{{ post.get_field('sub-event_heading') }}</h5>{% endif %}
+		<section class="sub-events">
+			{% for subevent in post.get_field('sub_events') %}
+				{% set image = TimberImage(subevent.image)|resize(300) %}
+				<div class="subevent sub-events__block {% if subevent.description %}has-description{% endif %}" data-interchange="[{{ image }}, small]" {% if subevent.description %}data-open="subevent__modal--{{ loop.index }}"{% endif %}>
+					<div class="sub-events__block__inner {% if subevent.image %}has-image{% endif %}">
+						<h3>{{ subevent.title }}</h3>
+					</div>
+				</div>
+				
+				{% if subevent.description %}
+					<div class="subevent subevent__modal reveal" data-reveal id="subevent__modal--{{ loop.index }}">
+						<button class="close-button" data-close aria-label="Close modal" type="button">
+						  <span aria-hidden="true">&times;</span>
+						</button>
+						<header class="subevent__modal__header">
+							<h2>{{ subevent.title }}</h2>
+							{% if subevent.dates %}<span class="subevent__modal__dates">{{ subevent.dates }}</span>{% endif %}
+						</header>
+						{{ subevent.description }}
+						{% if post.ticket_link %}<a class="button hollow" target="_blank" href="{{ post.ticket_link }}" class="event-header__tickets"><i class="fas fa-ticket-alt"></i> Tickets</a>{% endif %}
+					</div>
+				{% endif %}
+			{% endfor %}
+		</section>
+	</div>
+{% endif %}
+
+{% for component in post.get_field('sections') %}
+    {% include 'page-templates/views/components/' ~ component.acf_fc_layout ~ '.twig' with { 'component': component, 'component_index': loop.index } %}
+{% endfor %}

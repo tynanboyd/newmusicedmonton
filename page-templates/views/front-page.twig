@@ -1,0 +1,72 @@
+{% if post.meta('hero') %}
+
+	{% set hero = post.meta('hero') %}
+	{% set image = TimberImage(hero.background_image)|resize(1500) %}
+	{% set image_sm = image|resize(640) %}
+	{% set image_md = image|resize(1024) %}
+	
+	<section class="hero banner" data-interchange="[{{ image_sm }}, small], [{{ image_md }}, medium], {{ image }}, large">
+		<div class="hero__inner">			
+			<h1 class="hero__headline">
+				{{ hero.large_text }}
+			</h1>
+			<div class="hero__introduction">
+				{{ hero.small_text }}
+			</div>				
+		</div>
+	</section>
+
+{% endif %}
+
+{% for component in post.meta('sections') %}
+    {% include 'page-templates/views/components/' ~ component.acf_fc_layout ~ '.twig' with { 'component': component, 'component_index': loop.index } %}
+{% endfor %}
+
+<section class="event-listing vertical-padding">
+	<div class="row columns">
+		<h5>Upcoming Concerts</h5>
+	</div>	
+	{% for event in events %}
+		<div class="row align-justify event-listing__event event">
+			<div class="small-12 medium-5 columns">
+				<h2 class="event__title"><a href="{{ event.link }}">{{ event.title }}</a></h2>
+				<span class="event__location">{{ event.location }}</span>
+				<span class="event__date">{{ event.dates }}</span>
+				<div class="event__description">{{ event.description }}</div>
+				<div class="button-group">
+					<a href="{{ event.link }}" class="button">More info</a>
+					{% if event.ticket_link %} <a href="{{ event.ticket_link }}" class="button hollow">Tickets</a>{% endif %}
+				</div>
+			</div>
+			<div class="small-12 medium-6 columns">
+				{# Oct 20 2019: A second argument on the resize filter broke the site #}
+				<a href="{{ event.link }}"><img src="{{ TimberImage(event.thumbnail.src)|resize(500) }}" alt="{{ event.thumbnail.alt }}"></a>
+			</div>
+		</div>		
+	{% endfor %}
+</section>
+
+{% if post.meta('facebook_toggle') == 1 %}
+	<section class="facebook-feed vertical-padding vertical-padding--smaller show-for-medium text-center">
+		<h2 class="text-center">New Music Edmonton on Facebook</h2>	
+			<div class="facebook-feed__wrapper">
+				<div class="fb-page" data-href="https://www.facebook.com/NewMusicEdmonton/" data-tabs="timeline" data-width="" data-height="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/NewMusicEdmonton/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/NewMusicEdmonton/">New Music Edmonton</a></blockquote></div>
+			</div>	
+	</section>
+{% endif %}
+
+
+{% set ctaSection  = post.meta('multi_button_cta') %}		
+{% set image = TimberImage(ctaSection.background_image)|resize(1350) %}
+{% set image_sm = image|resize(640) %}
+{% set image_md = image|resize(1024) %}
+
+<section class="multi-button-cta" data-interchange="[{{ image_sm }}, small], [{{ image_md }}, medium], [{{ image }}, large]">	
+	{% for item in ctaSection.calls_to_action %}
+		<a href="{{ item.link }}">
+			<div class="multi-button-cta__item">
+				<span>{{ item.title }}</span>
+			</div>
+		</a>
+	{% endfor %}
+</section>

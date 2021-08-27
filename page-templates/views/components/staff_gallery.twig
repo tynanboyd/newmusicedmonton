@@ -1,0 +1,24 @@
+
+	<section class="staff-gallery vertical-padding">
+		
+		{% for person in component.staff_gallery %}
+			<div class="row person vertical-padding--smaller">
+				<div class="small-3 columns">
+					{% set image = TimberImage(person.photo)|resize(300, 300) %}
+					{% if person.photo %}
+						<img class="person__image" src="{{ image }}" alt="Photo of {{ person.name }}">
+					{% endif %}
+				</div>
+
+				<div class="small-9 columns">
+					<h3 class="person__name">{{ person.name }}</h3>
+					<span class="person__position">{{ person.position }}</span>
+					<div class="person__bio">
+					{{ person.bio }}
+					</div>
+				</div>							
+			</div>
+		{% endfor %}
+
+		
+	</section>

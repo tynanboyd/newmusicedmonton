@@ -1,0 +1,58 @@
+<footer class="site-footer vertical-padding sponsors">
+	<h6 class="text-center">Our Sponsors</h6>
+	<div class="sponsors__logos">
+		{% for logo in options.logos %}
+			{% if logo.logo_link %}<a target="_blank" href="{{ logo.logo_link }}">{% endif %}
+				<img class="sponsors__logo" src="{{ TimberImage(logo.logo_image)|resize(100) }}" alt="{{ logo.logo_image.alt }}">
+			{% if logo.logo_link %}</a>{% endif %}
+		{% endfor %}
+	</div>
+</footer>
+
+<footer class="site-footer vertical-padding">
+	<div class="row align-center align-middle">
+		<div class="small-12 medium-2 columns">
+			<a class="site-footer__logo" href="{{ site.link }}"><img class="site-footer__logo" src="{{ theme.link }}/dist/assets/images/nme-logo.png"></a>
+		</div>
+		<div class="small-12 medium-3 large-2 columns">
+			<nav class="footer-navigation" role="navigation" id="footer-navigation">  	
+		       <ul class="horizontal medium-vertical menu">
+		         {% for item in footermenu.get_items %}
+		           <li class="nav-main-item {{item.classes | join(' ')}}"><a class="nav-main-link" href="{{item.link}}">{{item.title}}</a>		            
+		           </li>
+		         {% endfor %}
+		       </ul>    	   
+		   </nav>	
+		</div>
+		<div class="small-12 medium-3 large-2 columns">
+			<ul class="menu align-center social">
+				{% if options.facebook %}<li><a target="_blank" href="{{ options.facebook }}"><i class="fab fa-facebook"></i></a></li>{% endif %}
+				{% if options.instagram %}<li><a target="_blank" href="{{ options.instagram }}"><i class="fab fa-instagram"></i></a></li>{% endif %}
+				{% if options.twitter %}<li><a target="_blank" href="{{ options.twitter }}"><i class="fab fa-twitter"></i></a></li>{% endif %}			
+			</ul>
+		</div>
+		{% if options.newsletter %}
+			<div class="small-12 medium-expand columns">				
+				{{ options.newsletter }}
+			</div>
+		{% endif %}
+		<div class="small-12 medium-expand columns">
+			<a href="{{ site.link }}/donate" class="button">Donate</a>
+		</div>
+	</div>
+	{% if options.acknowledgement %}
+		<div class="row align-center">
+			<div class="small-12 large-8 columns">
+				<p class="treaty text-center">
+					{{ options.acknowledgement }}
+				</p>
+			</div>
+		</div>
+	{% endif %}
+</footer>
+
+
+<script defer src="https://use.fontawesome.com/releases/v5.2.0/js/all.js" integrity="sha384-4oV5EgaV02iISL2ban6c/RmotsABqE4yZxZLcYMAdG7FAPsyHYAPpywE9PJo+Khy" crossorigin="anonymous"></script>
+
+
+{{ wp_footer }}

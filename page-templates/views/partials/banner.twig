@@ -1,0 +1,9 @@
+{% set image = TimberImage(post.get_field('banner_image'))|resize(1350) %}
+{% set image_sm = image|resize(640) %}
+{% set image_md = image|resize(1024) %}
+
+<section class="banner" role="banner" {% if post.get_field('banner_image') %}data-interchange="[{{ image_sm }}, small], [{{ image_md }}, medium], [{{ image }}, large]"{% endif %}>
+	<div class="banner__inner">
+		<h1 class="banner__page-title page-title">{{ post.title }}</h1>
+	</div>
+</section>

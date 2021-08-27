@@ -1,0 +1,52 @@
+<div data-sticky-container>
+  <div class="sticky" data-margin-top="0" data-sticky>
+    <header class="site-header">
+
+      <a href="{{ site.link }}"><img class="site-header__logo" src="{{ theme.link }}/dist/assets/images/nme-logo.png"></a>
+
+      <nav class="main-navigation show-for-large" role="navigation" id="main-navigation">  	
+          <ul id="mainmenu-dropdown" class="menu dropdown" data-dropdown-menu>
+            {% for item in menu.get_items %}
+              <li class="nav-main-item {{item.classes | join(' ')}}"><a class="nav-main-link" href="{{item.link}}">{{item.title}}</a>
+                {% if item.get_children %}
+                  <ul class="menu submenu align-left">
+                    {% for child in item.get_children %}
+                      <li class="nav-drop-item"><a href="{{child.link}}">{{child.title}}</a></li>
+                    {% endfor %}
+                   </ul>
+                {% endif %}
+              </li>
+            {% endfor %}
+          </ul>    	   
+      </nav>	
+
+      <button class="hamburger hamburger--collapse hide-for-large" type="button" data-toggle="offCanvas" id="mobile-menu-trigger">
+        <span class="hamburger-box">
+          <span class="hamburger-inner"></span>
+        </span>
+      </button> 
+
+    </header>
+
+  </div>
+</div>
+
+
+<div class="off-canvas position-left" id="offCanvas" data-off-canvas>  
+  <a href="{{ site.link }}"><img class="off-canvas__logo" src="{{ theme.link }}/dist/assets/images/nme-logo.png"></a>   
+  <nav class="main-navigation" role="navigation">       
+      <ul id="mobile-menu" class="menu drilldown vertical" data-drilldown>
+        {% for item in menu.get_items %}
+          <li class="nav-main-item {{item.classes | join(' ')}}"><a class="nav-main-link" href="{{item.link}}">{{item.title}}</a>
+            {% if item.get_children %}
+              <ul class="menu submenu align-left">
+                {% for child in item.get_children %}
+                  <li class="nav-drop-item"><a href="{{child.link}}">{{child.title}}</a></li>
+                {% endfor %}
+               </ul>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>        
+  </nav>  
+</div>

@@ -1,0 +1,93 @@
+body.login {
+	background-color: #0d9ddb;
+	background-size: cover;
+	font-family: 'Cabin';
+	background-position: center center;
+}
+
+body.login div#login {
+
+}
+
+body.login div#login h1 {
+    
+    padding: 1em 0 1em;
+    margin-bottom: 1em;
+}
+
+body.login div#login h1 a {
+	background-image: url('dist/assets/images/nme-logo.png');
+	background-size: cover;
+	width: auto;
+	height: 100px;
+	width: 200px;
+}
+
+body.login div#login form#loginform {
+	box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.8);
+	margin: 0 auto;
+}
+
+body.login div#login form#loginform p {
+
+}
+
+body.login div#login form#loginform p label {
+
+}
+
+body.login div#login form#loginform input {
+
+}
+
+body.login div#login form#loginform input#user_login {
+
+}
+
+body.login div#login form#loginform input#user_pass {
+
+}
+
+body.login div#login form#loginform p.forgetmenot {
+
+}
+
+body.login div#login form#loginform p.forgetmenot input#rememberme {
+
+}
+
+body.login div#login form#loginform p.submit {
+
+}
+
+body.login div#login form#loginform p.submit input#wp-submit {
+	background-color: #29588b;
+	border: none;
+	border-radius: 0px;
+	text-shadow: none;
+	box-shadow: none;	
+}
+
+body.login div#login form#loginform p.submit input#wp-submit:hover {
+	background-color: #0d9ddb;
+}
+
+body.login div#login p#nav {
+	color: #fff;
+
+}
+
+body.login div#login p#nav a {
+	color: #fff;
+
+}
+
+body.login div#login p#backtoblog {
+	color: #fff;
+
+}
+
+body.login div#login p#backtoblog a {
+	color: #fff;
+
+}

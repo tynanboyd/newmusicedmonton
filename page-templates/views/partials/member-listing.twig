@@ -1,0 +1,15 @@
+<div class="row columns vertical-padding member-listing">
+	<ul class="member-listing__menu menu vertical">
+		{% for member in post.get_field('member_listing') %}
+			<li class="member-listing__member">
+				{% if member.member_link %}
+					<a target="_blank" href="{{ member.member_link }}">
+				{% endif %}
+					{{ member.name }}
+				{% if member.member_link %}
+					</a>
+				{% endif %}
+			</li>			
+		{% endfor %}
+	</ul>
+</div>

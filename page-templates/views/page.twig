@@ -1,0 +1,19 @@
+{% include 'page-templates/views/partials/banner.twig' %}
+
+{% if post.content %}
+	<main class="entry-content vertical-padding">
+		<div class="row align-center">
+			<div class="small-12 medium-10 columns">
+				{{ post.content }}
+			</div>
+		</div>
+	</main>
+{% endif %}
+
+{% if post.get_field('member_listing') %}
+	{% include 'page-templates/views/partials/member-listing.twig' %}
+{% endif %}
+
+{% for component in post.get_field('sections') %}
+    {% include 'page-templates/views/components/' ~ component.acf_fc_layout ~ '.twig' with { 'component': component, 'component_index': loop.index } %}
+{% endfor %}

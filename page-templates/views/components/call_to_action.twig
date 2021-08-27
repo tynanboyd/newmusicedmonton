@@ -1,0 +1,11 @@
+{% set image = TimberImage(component.background_image)|resize(1350) %}
+{% set image_sm = image|resize(640) %}
+{% set image_md = image|resize(1024) %}
+
+<section class="call-to-action" data-interchange="[{{ image_sm }}, small], [{{ image_md }}, medium], [{{ image }}, large]">
+	{% if component.background_image %}<div class="overlay overlay--black-to-transparent"></div>{% endif %}
+	<div class="call-to-action__inner background--orange-gradient">
+		<h2 class="call-to-action__headline">{{ component.headline }}</h2>
+		<a class="button hollow" href="{{ component.link }}">{{ component.button_text }}</a>
+	</div>
+</section>

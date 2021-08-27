@@ -1,0 +1,26 @@
+{% include 'page-templates/views/partials/banner.twig' %}
+{% if post.content %}
+	<div class="row columns vertical-padding">
+		{{ post.content }}
+	</div>
+{% endif %}
+
+<section class="past-events vertical-padding">	
+		{% for event in past %}
+			<div class="row align-justify event-listing__event event">
+				<div class="small-12 medium-5 columns">
+					<h2 class="event__title"><a href="{{ event.link }}">{{ event.title }}</a></h2>
+					<span class="event__location">{{ event.location }}</span>
+					<span style="margin-bottom: 1em;" class="event__date">{{ event.dates }}</span>					
+					<div class="button-group">
+						<a href="{{ event.link }}" class="button">More info</a>						
+					</div>
+				</div>
+				{% if event.thumbnail %}
+					<div class="small-12 medium-6 columns">
+						<a href="{{ event.link }}"><img src="{{ TimberImage(event.thumbnail.src)|resize(800) }}" alt="{{ event.thumbnail.alt }}"></a>
+					</div>
+				{% endif %}
+			</div>	
+		{% endfor %}			
+</section>
